@@ -1,45 +1,48 @@
-# IBM Watson NLP Emotion Detection
+# Final Project: IBM Watson NLP Emotion Detection
 
-A Python application that calls an IBM Watson NLP emotion-analysis endpoint and returns scores for anger, disgust, fear, joy, and sadness, plus the dominant emotion.
+**Repository Name:** `oaqjp-final-project-emb-ai`
 
-## Required configuration before use
+A Python application that uses the IBM Watson NLP Emotion Detection service to analyze text and return scores for anger, disgust, fear, joy, and sadness, along with the dominant emotion.
+
+## Technologies Used
+- Python
+- Flask
+- IBM Watson NLP Emotion Detection API
+- HTML, CSS, and JavaScript
+- Pylint
+
+## Required Configuration Before Use
 1. Open your Coursera/IBM Skills Network lab and copy its exact Watson NLP endpoint.
-2. Replace `PASTE_YOUR_WATSON_NLP_ENDPOINT_HERE` in both `emotion_detection.py` and `EmotionDetection/emotion_detection.py`.
-3. Verify the model ID and response schema against your lab instructions. Never publish API keys or private credentials.
+2. Configure the endpoint in the appropriate emotion detection Python file.
+3. Verify the model ID and response format against the lab instructions.
+4. Never publish API keys or private credentials.
 
 ## Install
 ```bash
-python -m pip install requests flask
+python3 -m pip install requests flask
 ```
 
-## Run unit tests
+## Run Unit Tests
 ```bash
-python -m unittest -v test_emotion_detection.py
+python3 -m unittest -v test_emotion_detection.py
 ```
-The included tests mock the service. They do not confirm the real endpoint works.
 
-## Run the web application
+## Run the Web Application
 ```bash
-python server.py
+python3 server.py
 ```
-Open http://127.0.0.1:5000.
 
-## Test blank input (while the server is running)
-```bash
-python -c "import requests; r=requests.post('http://127.0.0.1:5000/emotionDetector', json={'text':'   '}); print(r.status_code); print(r.json())"
-```
-Expected behavior: HTTP 400 and a message asking for text.
+Open the application through your lab environment's preview on port 5000.
 
-## Submission evidence checklist
-- [ ] Public GitHub README URL
-- [ ] `emotion_detection.py` source
-- [ ] Actual terminal output from import/sample test
-- [ ] Formatted source and terminal output
-- [ ] Public GitHub `EmotionDetection/__init__.py` URL
-- [ ] Actual package import output
-- [ ] `test_emotion_detection.py` and actual test results
-- [ ] `server.py` and screenshot of the running interface
-- [ ] Actual HTTP 400 output and blank-input screenshot
-- [ ] Modified `server.py` and actual Pylint output
+## Error Handling
+The application checks for blank input and displays an error message when the input is invalid.
 
-Capture genuine outputs/screenshots from your environment. Match filenames and requirements in the course rubric.
+## Project Files
+- `EmotionDetection/emotion_detection.py` — analyzes text and returns emotion scores.
+- `EmotionDetection/__init__.py` — exposes the emotion detection function.
+- `server.py` — runs the Flask web application.
+- `test_emotion_detection.py` — contains unit tests.
+- `static/` and `templates/` — contain the web interface files.
+
+## Static Code Analysis
+Pylint is used to check the Python code for coding errors and style issues.
