@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emotion Detection</title>
+</head>
+<body>
+  <h1>Emotion Detection Application</h1>
+  <form id="emotion-form">
+    <label for="text">Enter text to analyze:</label><br>
+    <textarea id="text" rows="5" cols="50" placeholder="Type a sentence..."></textarea><br>
+    <button type="submit">Analyze Emotion</button>
+  </form>
+  <p id="message" role="status"></p>
+  <pre id="result"></pre>
+  <script>
+    document.getElementById("emotion-form").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const text = document.getElementById("text").value;
+      const message = document.getElementById("message");
+      const result = document.getElementById("result");
+      message.textContent = "";
+      result.textContent = "";
+      if (!text.trim()) {
+        message.textContent = "Please enter some text.";
+        return;
+      }
+      try {
+        const response = await fetch("/emotionDetector", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({text: text})
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          message.textContent = data.error || "Unable to analyze the text.";
+          return;
+        }
+        result.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        message.textContent = "Unable to contact the application server.";
+      }
+    });
+  </script>
+</body>
+</html>
